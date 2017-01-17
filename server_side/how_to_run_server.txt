@@ -1,0 +1,8 @@
+1. Make sure flask is installed (pip)
+2. Open CMD
+3. Navigate to the folder where hello.py is saved
+4. run the command "set FLASK_APP=hello.py" if you're on Windows system
+5. run the command "flask run"
+
+Then use the browser and go to 127.0.0.1:5000/user/some_string
+The page should show "Hello, some_string!".

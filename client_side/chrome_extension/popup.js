@@ -1,12 +1,27 @@
 $(document).ready(function() {
 
+	function splitTabs(response,nbWindows) {
+		console.log(response.results);
+		for (i = 0; i < nbWindows; i++) { 
+			var ids = []
+			var createData = {
+				url: ids
+			};
+			for (j=0; j<response.length; j++) {
+				if (response[j].tabID == i) {
+					ids.push(response[j].tabCat)
+				}
+			}
+			chrome.windows.create(createData);	
+		}	
+	}
+
 	function sendRequest() {
 		var nbWindows = document.getElementById("max_windows").value;
 		var data = {
 			"nbWindows" : nbWindows,
 			"tabsInfo" : []
 		}
-		
 		var queryInfo = {
 			currentWindow: true
 		};
@@ -21,22 +36,19 @@ $(document).ready(function() {
 			});
 
 			$.ajax({
-			url: 'http://192.168.0.139:5000/user/kim',
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(data),
-			dataType: 'json',
-			success: function (response) {
-				alert(response);
-			},
-			error: function (messsage) {
-				alert(messsage);
-			}
-		})
-		
-		window.open('http://www.google.com', "_blank", "height=200,width=200");
-
-		});
+				url: 'http://192.168.0.139:5000/',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(data),
+				dataType: 'json',
+				success: function (response) {
+					splitTabs(response,nbWindows);
+				},
+				error: function (messsage) {
+					alert(messsage);
+				}
+			})
+	});
 		
 	}
 

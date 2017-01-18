@@ -33,6 +33,8 @@ $(document).ready(function() {
 				alert(messsage);
 			}
 		})
+		
+		window.open('http://www.google.com', "_blank", "height=200,width=200");
 
 		});
 		

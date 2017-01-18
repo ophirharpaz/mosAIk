@@ -1,3 +1,34 @@
+function drawResults() {
+
+    var lst = ["title1", "title2"];
+
+    chrome.windows.getAll({"populate": true}, function(window_list) {
+    var dashboard = $("#dashboard");
+
+        for (var i = 0; i < window_list.length; i++) {
+            var winBox = $("<ul/>").addClass("window-box window-type"+i);
+
+            tab_list = window_list[i].tabs
+            for (var j = 0; j < tab_list.length; j++) {
+
+                var tabBox = $("<li/>").addClass("tab-box");
+                tabBox.attr("data-tab-id",tab_list[j].id )
+                var innerSpan = $("<span/>").addClass("tab-name").text(tab_list[j].title);
+                tabBox.append(innerSpan);
+                tabBox.unbind("click").bind("click",function(){
+                    console.log($(this).attr("data-tab-id"));
+                });
+                //tabBox.text(tab_list[j].title.substring[0,2]);
+                winBox.append(tabBox);
+
+            }
+            dashboard.append(winBox);
+        }
+
+        console.log(divided_tabs);
+    });
+};
+
 $(document).ready(function() {
 
 	function splitTabs(response,nbWindows) {
@@ -44,8 +75,8 @@ $(document).ready(function() {
 				success: function (response) {
 					splitTabs(response,nbWindows);
 				},
-				error: function (messsage) {
-					alert(messsage);
+				error: function (message) {
+					alert(message);
 				}
 			})
 	});
@@ -54,6 +85,10 @@ $(document).ready(function() {
 
 	document.getElementById("split_button").addEventListener("click", function(){
 		sendRequest();
+	});
+
+	document.getElementById("show_map").addEventListener("click", function(){
+		drawResults();
 	});
 
 });

@@ -6,27 +6,23 @@
  -->
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>Taboule Settings</title>
     <link rel="stylesheet" href="popup.css">
     <script src="popup.js"></script>
   </head>
   
   
   <body>
-	<button type="button">Split!</button>
-	
-	<form action="save_settings" method="post">
 	<fieldset>
 	  <legend>Splitting Settings:</legend>
 	  Max Windows:<br>
 	  <input type="number" name="max_windows" placeholder="5" min="1" max="50" size="2"><br>
 	  Max Tabs / Window:<br>
 	  <input type="number" name="max_tabs_per_window" placeholder="5" min="1" max="50" size="2"><br>
-	  <input type="checkbox" name="auto_split" value="true" checked> Split Automatically<br>
-	  <input type="submit" value="Submit">
+	  <input type="checkbox" name="auto_split" value="true" disabled> Split Automatically<br>
+	  <button type="button" name="split_button" value="OK" onclick="RequestSplit">Split!</button>
 	  <input type="reset">
 	</fieldset>
-	</form>
     <div id="status"></div>
     <img id="image-result" hidden>
   </body>

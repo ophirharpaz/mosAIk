@@ -10,7 +10,7 @@ function getAllTabsUrls() {
         console.log('Tab URL: ', tab.url);
         console.log('Tab Title: ', tab.title);
 		console.log('Tab ID: ', tab.id);
-		chrome.tabs.executeScript(tab.id, { "code": "document.documentElement.outerHTML;" }, function (result) {
+		chrome.tabs.executeScript(tab.id, { "code": "document.documentElement.innerText;" }, function (result) {
 			console.log(result);
 		});
     });

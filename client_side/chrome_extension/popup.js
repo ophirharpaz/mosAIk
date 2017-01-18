@@ -2,18 +2,18 @@ $(document).ready(function() {
 
 	function sendRequest() {
 		var nbWindows = document.getElementById("max_windows").value;
-		var sent_data = { field1: 'yoyo', field2 : "hello2"};
+		var sent_data = { nbWindows: nbWindows};
 
 		$.ajax({
-			url: '192.168.0.139:5000/user/kim',
+			url: 'http://192.168.0.139:5000/user/kim',
 			type: 'GET',
 			data: sent_data,
 			contentType: 'application/json; charset=utf-8',
 			success: function (response) {
-				alert(response.status);
+				alert(response);
 			},
-			error: function () {
-				alert("error");
+			error: function (messsage) {
+				alert(messsage);
 			}
 		})
 	}

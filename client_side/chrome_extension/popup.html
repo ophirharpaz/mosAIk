@@ -3,28 +3,27 @@
  This page is shown when the extension button is clicked, because the
  "browser_action" field in manifest.json contains the "default_popup" key with
  value "popup.html".
- -->
+-->
 <html>
-  <head>
-    <title>Taboule Settings</title>
-    <link rel="stylesheet" href="popup.css">
-    <script src="popup.js"></script>
-  </head>
-  
-  
-  <body>
+<head>
+  <title>Taboule Setting</title>
+  <script src="jquery.min.js"></script>
+  <link rel="stylesheet" href="popup.css">
+  <script src="popup.js"></script>
+</head>
+<body>
 	<fieldset>
-	  <legend>Splitting Settings:</legend>
-	  Max Windows:<br>
-	  <input type="number" name="max_windows" placeholder="5" min="1" max="50" size="2"><br>
-	  Max Tabs / Window:<br>
-	  <input type="number" name="max_tabs_per_window" placeholder="5" min="1" max="50" size="2"><br>
-	  <input type="checkbox" name="auto_split" value="true" disabled> Split Automatically<br>
-	  <button type="button" name="split_button" value="OK" onclick="RequestSplit">Split!</button>
-	  <input type="reset">
-	</fieldset>
-    <div id="status"></div>
-    <img id="image-result" hidden>
-  </body>
+   <legend>Splitting Settings:</legend>
+   Max Windows:<br>
+   <input type="number" name="max_windows" id="max_windows" value="5" min="1" max="50" size="2"><br>
+   Max Tabs / Window:<br>
+   <input type="number" name="max_tabs_per_window" id="max_tabs_per_window" value="5" min="1" max="50" size="2"><br>
+   <input type="checkbox" name="auto_split" value="true" disabled> Split Automatically<br>
+   <button type="button" name="split_button" id="split_button" value="OK" >Split!</button>
+   <input type="reset">
+ </fieldset>
+ <div id="status"></div>
+ <img id="image-result" hidden>
+</body>
 </html>
 

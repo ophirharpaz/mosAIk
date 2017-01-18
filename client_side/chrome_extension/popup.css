@@ -1,7 +1,7 @@
 body {
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
   font-size: 100%;
-  min-width: 200px;
+  min-width: 600px;
 }
 #status {
   /* avoid an excessively wide status text */
@@ -10,3 +10,46 @@ body {
   overflow: hidden;
   max-width: 400px;
 }
+
+li.tab-box {
+display: inline-block;
+    background-color: deepskyblue;
+    /* margin: 2px; */
+    border-top-right-radius: 12px;
+    border-top-left-radius: 11px;
+    width: 60px;
+    height: 24px;
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
+    -webkit-transition: top 0.5s; /* Safari */
+    transition: top 0.5s;
+    top:0;
+}
+
+.window-box{
+    list-style: none;
+    padding: 0px;
+    border: 1px solid black;
+        padding: 7px 5px;
+    }
+
+.window-box.window-type0 .tab-box{
+background-color:SeaGreen;
+}
+
+    .tab-name{
+    display:none;
+    color:rgba(255,255,255,0.5);
+    font-size:10px;
+    text-overflow: ellipsis;
+    padding:0px 7px;
+    }
+
+
+ .tab-box:hover {
+    top:-5px;
+ }
+    .tab-box:hover .tab-name{
+    display:inline-block;
+    }

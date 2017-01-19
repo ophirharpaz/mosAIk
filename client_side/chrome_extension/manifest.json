@@ -1,9 +1,13 @@
 {
   "manifest_version": 2,
 
-  "name": "Respond",
-  "description": "This extension splits your tabs according to their topic",
+  "name": "mosAIk",
+  "description": "mosAIk splits your tabs according to topic and gives you a friendly display of the new browser configuration",
   "version": "1.0",
+
+  "icons": { "16": "icon.png",
+           "48": "icon48.png"
+  },
 
   "browser_action": {
     "default_icon": "icon.png",

@@ -2,6 +2,7 @@ body {
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
   font-size: 100%;
   min-width: 200px;
+  margin: 10pt;
 }
 #status {
   /* avoid an excessively wide status text */
@@ -9,6 +10,10 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 400px;
+}
+
+input {
+    text-align: center;
 }
 
 li.tab-box {
@@ -59,10 +64,16 @@ background-color:SeaGreen;
 }
 
 h3, .h3{
+  margin-top: 10pt;
   text-align: center;
 }
 
 .lead {
   text-align: center; 
   margin-bottom: 0px;
+}
+
+.btn-block+.btn-block {
+    margin-top: 5px;
+    margin-bottom: 10px;
 }

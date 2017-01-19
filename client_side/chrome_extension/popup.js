@@ -18,7 +18,7 @@ function drawResults() {
                 var innerSpan = $("<span/>").addClass("tab-name").text(tab_list[j].title);
                 tabBox.append(innerSpan);
                 tabBox.unbind("click").bind("click",function(){
-                    console.log($(this).attr("data-tab-id"));
+                    //console.log($(this).attr("data-tab-id"));
                     chrome.windows.update(parseInt($(this).attr("data-tab-window-id")), {"focused":true})
                     chrome.tabs.update(parseInt($(this).attr("data-tab-id")), {"active":true});
                 });
@@ -31,6 +31,7 @@ function drawResults() {
 };
 
 $(document).ready(function() {
+	var idCurrentWindow;
 
 	function splitTabs(response,nbWindows) {
 		for (i = 0; i < nbWindows; i++) { 
@@ -44,7 +45,8 @@ $(document).ready(function() {
 				}
 			}
 			chrome.windows.create(createData);	
-		}	
+		}
+		chrome.windows.remove(idCurrentWindow);
 	}
 
 	function sendRequest() {
@@ -56,9 +58,9 @@ $(document).ready(function() {
 		var queryInfo = {
 			currentWindow: true
 		};
-
 		chrome.tabs.query(queryInfo, function(tabs) {
 			tabs.forEach(function(tab) {
+				idCurrentWindow = tab.windowId;
 				var obj = {
 					"tabID" : tab.id,
 					"tabURL" : tab.url

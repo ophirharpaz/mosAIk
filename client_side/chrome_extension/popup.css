@@ -55,9 +55,17 @@ li.tab-box {
   background-color:#588c7e;
 }
 
+.window-box.window-type4 .tab-box{
+  background-color:#e0876a;
+}
+
+.window-box.window-type4 .tab-box{
+  background-color:#667292;
+}
+
 .tab-name{
   display:none;
-  color:rgba(255,255,255,0.5);
+  color:#333333;
   font-size:10px;
   text-overflow: ellipsis;
   padding:0px 7px;

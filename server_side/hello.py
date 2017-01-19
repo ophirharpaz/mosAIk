@@ -1,24 +1,38 @@
 import algorithm
-from flask import Flask, request
+from flask import Flask, request, jsonify
+
 app = Flask(__name__)
 
-@app.route('/')
-def basic():
-    return 'Hello'
 
-
-@app.route("/user/<username>", methods=['GET', 'POST'])
-def welcome_user(username):
+@app.route('/', methods=['GET', 'POST'])
+def welcome_user():
     if request.method == 'POST':
+        results = []
         content = request.get_json()
-        print content
-        return "Hello, POST %s" % username
+
+        tabIDs, tabURLs = parse_content(content)
+
+        tabClusters = algorithm.run_algorithm(int(content['nbWindows']), tabURLs)
+
+        for i in range(len(tabURLs)):
+            obj_dict = {'winID': tabClusters[i], 'tabURL': tabURLs[i]}
+            results.append(obj_dict)
+
+        print results
+        return jsonify(results)
     else:
-        return 'Hello, GET %s' % username
+        return 'Hello, world!'
 
 
-"""
-Function to call the algorthim implemented in algorithm.py
-"""
-def call_algorithm(input):
-    return algorithm.run_algorthim(input)
+def parse_content(content):
+
+    tabIDs = []
+    tabURLs = []
+
+    object_list = content['tabsInfo']
+
+    for obj in object_list:
+        tabIDs.append(obj['tabID'])
+        tabURLs.append(obj['tabURL'])
+
+    return tabIDs, tabURLs

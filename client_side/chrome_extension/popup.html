@@ -8,21 +8,22 @@
 <head>
   <title>MOSAIK Setting</title>
   <script src="jquery.min.js"></script>
+  <link rel="stylesheet" href="bootstrap.min.css">
   <link rel="stylesheet" href="popup.css">
   <script src="popup.js"></script>
 </head>
 
 <body>
     <fieldset>
-       <legend>Splitting Settings:</legend>
-       Max Windows:<br>
-       <input type="number" name="max_windows" id="max_windows" value="3" min="1" max="50" size="2"><br>
+       <h3>MosAIk</h3>
+       <label class="control-label">Max Windows</label>
+       <br>
+       <input type="number" name="max_windows" id="max_windows" value="3" min="1" max="50" size="2" class="form-control input-sm"><br>
        <!--
        <input type="checkbox" name="auto_split" value="true" disabled> Split Automatically<br>
        -->
-       <br>
-       <button type="button" name="split_button" id="split_button" value="OK" >Split!</button>
-       <button type="button" name="show_map" id="show_map">Show!</button>
+       <button type="button" name="split_button" id="split_button" value="OK" class="btn btn-default btn-lg btn-block btn-success">Split!</button>
+       <button type="button" name="show_map" id="show_map" class="btn btn-default btn-lg btn-block btn-info">Show!</button>
     </fieldset>
 
 <div id="dashboard"></div>

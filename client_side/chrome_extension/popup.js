@@ -32,15 +32,14 @@ function drawResults() {
 $(document).ready(function() {
 
 	function splitTabs(response,nbWindows) {
-		console.log(response.results);
 		for (i = 0; i < nbWindows; i++) { 
 			var ids = []
 			var createData = {
 				url: ids
 			};
 			for (j=0; j<response.length; j++) {
-				if (response[j].tabID == i) {
-					ids.push(response[j].tabCat)
+				if (response[j].winID == i) {
+					ids.push(response[j].tabURL)
 				}
 			}
 			chrome.windows.create(createData);	

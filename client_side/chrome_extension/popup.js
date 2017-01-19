@@ -12,20 +12,20 @@ function drawResults() {
             for (var j = 0; j < tab_list.length; j++) {
 
                 var tabBox = $("<li/>").addClass("tab-box");
-                tabBox.attr("data-tab-id",tab_list[j].id )
+                tabBox.attr("data-tab-id",tab_list[j].id)
+                tabBox.attr("data-tab-window-id",tab_list[j].windowId)
                 var innerSpan = $("<span/>").addClass("tab-name").text(tab_list[j].title);
                 tabBox.append(innerSpan);
                 tabBox.unbind("click").bind("click",function(){
                     console.log($(this).attr("data-tab-id"));
+                    chrome.windows.update(parseInt($(this).attr("data-tab-window-id")), {"focused":true})
+                    chrome.tabs.update(parseInt($(this).attr("data-tab-id")), {"active":true});
                 });
-                //tabBox.text(tab_list[j].title.substring[0,2]);
                 winBox.append(tabBox);
 
             }
             dashboard.append(winBox);
         }
-
-        console.log(divided_tabs);
     });
 };
 

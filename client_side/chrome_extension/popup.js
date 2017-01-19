@@ -4,6 +4,7 @@ function drawResults() {
 
     chrome.windows.getAll({"populate": true}, function(window_list) {
     var dashboard = $("#dashboard");
+    document.getElementById("dashboard").innerHTML = "";    // reset the dashboard before drawing
 
         for (var i = 0; i < window_list.length; i++) {
             var winBox = $("<ul/>").addClass("window-box window-type"+i);

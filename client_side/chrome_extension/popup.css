@@ -1,8 +1,7 @@
 body {
   font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
   font-size: 100%;
-  min-width: 400px;
-  background-color: mintcream;
+  min-width: 200px;
 }
 #status {
   /* avoid an excessively wide status text */
@@ -54,3 +53,11 @@ background-color:SeaGreen;
     .tab-box:hover .tab-name{
     display:inline-block;
     }
+
+.btn-lg {
+    padding: 10px 10px;
+}
+
+h3, .h3{
+  text-align: center;
+}

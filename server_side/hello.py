@@ -1,9 +1,9 @@
 import algorithm
-import Demo
-from flask import Flask, request, jsonify
+from flask import Flask
+from flask import request
+from flask import jsonify
 
 
-app = Flask(__name__)
 MOCK = True
 mock_data = [
                 {'winID': '0', 'tabURL': 'https://www.facebook.com/'},
@@ -20,6 +20,9 @@ mock_data = [
             ]
 
 
+app = Flask(__name__)
+
+
 @app.route('/', methods=['GET', 'POST'])
 def welcome_user():
     if request.method == 'POST':
@@ -33,11 +36,10 @@ def welcome_user():
 
             tab_ids, tab_urls = parse_content(content)
 
-            # tabClusters = algorithm.run_algorithm(int(content['nbWindows']), tabURLs)
-            tabClusters = Demo.cluster_tabs(int(content['nbWindows']), tab_urls)
+            tab_clusters = algorithm.cluster_tabs(int(content['nbWindows']), tab_urls)
 
             for i in range(len(tab_urls)):
-                obj_dict = {'winID': tabClusters[i], 'tabURL': tab_urls[i]}
+                obj_dict = {'winID': tab_clusters[i], 'tabURL': tab_urls[i]}
                 results.append(obj_dict)
 
         print results
@@ -47,14 +49,13 @@ def welcome_user():
 
 
 def parse_content(content):
-
-    tabIDs = []
-    tabURLs = []
+    tab_ids = []
+    tab_urls = []
 
     object_list = content['tabsInfo']
 
     for obj in object_list:
-        tabIDs.append(obj['tabID'])
-        tabURLs.append(obj['tabURL'])
+        tab_ids.append(obj['tabID'])
+        tab_urls.append(obj['tabURL'])
 
-    return tabIDs, tabURLs
+    return tab_ids, tab_urls

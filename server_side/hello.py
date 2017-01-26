@@ -5,42 +5,36 @@ from flask import jsonify
 
 
 MOCK = True
-mock_data = [
-                {'winID': '0', 'tabURL': 'https://www.facebook.com/'},
-                {'winID': '0', 'tabURL': 'https://twitter.com/?lang=fr'},
-                {'winID': '0', 'tabURL': 'https://www.instagram.com/'},
-                {'winID': '1', 'tabURL': 'http://www.newyorker.com/'},
-                {'winID': '1', 'tabURL': 'http://www.chicagotribune.com/'},
-                {'winID': '1', 'tabURL': 'http://edition.cnn.com/'},
-                {'winID': '1', 'tabURL': 'http://www.bbc.com/news'},
-                {'winID': '2', 'tabURL': 'http://bigocheatsheet.com/'},
-                {'winID': '2', 'tabURL': 'http://stackoverflow.com/questions/487258/what-is-a-plain-english-explanation-of-big-o-notation'},
-                {'winID': '2', 'tabURL': 'http://stackoverfellows.tk/'},
-                {'winID': '2', 'tabURL': 'http://stackoverflow.com/questions/41712739/big-o-notation-summation-confusion'},
-            ]
-
-
 app = Flask(__name__)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def welcome_user():
+    print 'reached functions'
     if request.method == 'POST':
+        content = request.get_json()
+        num_windows = int(content['nbWindows'])
+        results = [[] for i in range(num_windows)]
+
+        tab_ids, tab_urls = parse_content(content)
+
         if MOCK:
-            print 'MOCK'
-            results = mock_data
+            tab_clusters = algorithm.mock_cluster_tabs(num_windows,tab_urls)
         else:
-            print 'NOT MOCK'
-            results = []
-            content = request.get_json()
+            tab_clusters = algorithm.cluster_tabs(num_windows, tab_urls)
 
-            tab_ids, tab_urls = parse_content(content)
+        print 'clusters: {}'.format(tab_clusters)
 
-            tab_clusters = algorithm.cluster_tabs(int(content['nbWindows']), tab_urls)
-
-            for i in range(len(tab_urls)):
-                obj_dict = {'winID': tab_clusters[i], 'tabURL': tab_urls[i]}
-                results.append(obj_dict)
+        # Generate result
+        # assumes that for nbWindows = n, clusters indices are 0, 1, ..., n - 1
+        for i in range(len(tab_urls)):
+            cluster = tab_clusters[i]
+            obj = {
+                'cluster': cluster,
+                'tab_url': tab_urls[i],
+                'tab_id': tab_ids[i]
+            }
+            results[cluster].append(obj)
 
         print results
         return jsonify(results)

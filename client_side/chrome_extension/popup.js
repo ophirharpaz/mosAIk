@@ -74,7 +74,8 @@ $(document).ready(function() {
 			});
 
 			$.ajax({
-				url: 'http://192.168.0.139:5000/',
+				//url: 'http://192.168.0.139:5000/',
+				url: 'http://127.0.0.1:5000/',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(data),

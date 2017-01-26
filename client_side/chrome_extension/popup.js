@@ -26,46 +26,48 @@ function drawConfiguration() {
             dashboard.append(winBox);
         }
     });
-};
+}
 
 $(document).ready(function() {
 	var idCurrentWindow;
 
 	function splitTabs(response, nbWindows) {
-		// Get active tab
-		var activeTab;
-		chrome.tabs.query({active:true}, function(tabs) {
-				activeTab = tabs[0];
-				console.log(activeTab);
-		});
+        // Get active tab
 
-		// Get cluster of active tab
-		var activeCluster;
-		for (var i = 0; i < response.length; i++) {
-			if (response[i].tabURL == activeTab.url) {
+        var activeTab;
+        chrome.tabs.query({active: true}, function (tabs) {
+            activeTab = tabs[0];
+            console.log(activeTab);
+        });
+
+        // Get cluster of active tab
+        var activeCluster;
+        for (var i = 0; i < response.length; i++) {
+            if (response[i].tabURL == activeTab.url) {
                 activeCluster = response[i].winID;
-            	break;
-			}
-		}
+                break;
+            }
+        }
 
-		for (i = 0; i < nbWindows; i++) {
-			var ids = [];
-			for (var j = 0; j < response.length; j++) {
-				if (response[j].winID == i) {
-					chrome.tabs.move(384,{windowId:activeTab.windowId,index:-1},function(tab){})
-					ids.push(response[j].tabURL)
-				}
-			chrome.windows.create(createData);	
-		}
-
-	}
+        for (i = 0; i < nbWindows; i++) {
+            var ids = [];
+            for (var j = 0; j < response.length; j++) {
+                if (response[j].winID == i) {
+                    chrome.tabs.move(384, {windowId: activeTab.windowId, index: -1}, function (tab) {
+                    });
+                    ids.push(response[j].tabURL)
+                }
+                chrome.windows.create(createData);
+            }
+        }
+    }
 
 	function sendRequest() {
 		var nbWindows = document.getElementById("max_windows").value;
 		var data = {
 			"nbWindows" : nbWindows,
 			"tabsInfo" : []
-		}
+		};
 		var queryInfo = {
 			currentWindow: true
 		};
@@ -75,13 +77,13 @@ $(document).ready(function() {
 				var obj = {
 					"tabID" : tab.id,
 					"tabURL" : tab.url
-				}
+				};
 				data["tabsInfo"].push(obj);
 			});
 
 			$.ajax({
 				//url: 'http://192.168.0.139:5000/',
-				url: 'http://127.0.0.1:5000/',
+				url: 'http://192.168.1.103:5000/',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(data),
@@ -93,7 +95,7 @@ $(document).ready(function() {
 					alert(message);
 				}
 			})
-	});
+		});
 		
 	}
 

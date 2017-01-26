@@ -34,6 +34,11 @@ $(document).ready(function() {
 	var idCurrentWindow;
 
 	function splitTabs(response,nbWindows) {
+		windows=[]
+		for (j=0; j<response.length; j++){
+			$.inArray()
+		}
+
 		for (i = 0; i < nbWindows; i++) { 
 			var ids = []
 			var createData = {
